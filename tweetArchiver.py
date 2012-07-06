@@ -58,7 +58,7 @@ f = codecs.open(archiveFile, 'a', 'utf-8')
 for status in reversed(status_list):
     f.write(status.text + '\n')
     f.write(status.created_at.strftime("%B %d, %Y at %I:%M%p\n"))
-    f.write('http://twitter.com/'+status.author.name+'/'+str(status.id)+'\n')
+    f.write('http://twitter.com/'+status.author.screen_name+'/'+str(status.id)+'\n')
     f.write('- - - - - \n\n')
 
 f.close()
