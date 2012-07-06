@@ -3,29 +3,18 @@ import codecs
 from time import sleep
 
 # Archive file location
-archiveFile = "/Users/timbueno/Desktop/logDir/twitter.txt"
+archiveFile = "/Users/timbueno/Desktop/logDir/twitter2.txt"
+theUserName = 'deathbyvolcano'
 
-# Twitter App "SimpleTweetArchiver" registered by @timbueno
-consumer_key = 'JvEBnWYBXjh46Rsl5lU8Q'
-consumer_secret = '9XEuSiCl708SM34KWonTplymBegH2UrPmNuSznBmBkw'
-
-# Authenticate
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth_url = auth.get_authorization_url()
-print 'Please authorize: ' + auth_url
-verifier = raw_input('PIN: ').strip()
-auth.get_access_token(verifier)
-access_token = auth.access_token.key
-access_secret = auth.access_token.secret
-auth.set_access_token(access_token, access_secret)
-api = tweepy.API(auth) # Instantiate API object
+# Create Twitter API Object
+api = tweepy.API()
 
 # helpful variables
 status_list = [] # Create empty list to hold statuses
 cur_status_count = 0 
 
 # Request first status page from twitter
-statuses = api.user_timeline(count=200, include_rts=True)
+statuses = api.user_timeline(count=200, include_rts=True, screen_name=theUserName)
 # Get User information for display
 theUser = statuses[0].author
 total_status_count = theUser.statuses_count
@@ -47,7 +36,7 @@ while statuses != []:
     theMaxId = theMaxId - 1
     
     # Get new page of statuses based on current id location
-    statuses = api.user_timeline(count=200, include_rts=True, max_id=theMaxId)
+    statuses = api.user_timeline(count=200, include_rts=True, max_id=theMaxId, screen_name=theUserName)
     print "%d of %d tweets processed..." % (cur_status_count, total_status_count)
 
 print "- - - - - - - - - - - - - - - - -"
