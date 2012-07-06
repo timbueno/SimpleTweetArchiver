@@ -1,3 +1,16 @@
+# tweetArchiver.py
+#
+# Quickly archive your tweets to a plain text file.
+#
+# This script is limited to retrieving only your
+# 3,200 most recent tweets (you have twitter
+# to thank for that)
+#
+# Created by: Tim Bueno
+# Website: http://www.timbueno.com
+#
+# USAGE: python tweetArchiver.py
+
 import tweepy
 import codecs
 from time import sleep
