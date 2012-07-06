@@ -5,7 +5,7 @@ from time import sleep
 # Archive file location
 archiveFile = "/Users/timbueno/Desktop/logDir/twitter.txt"
 
-# Twitter App
+# Twitter App "SimpleTweetArchiver" registered by @timbueno
 consumer_key = 'JvEBnWYBXjh46Rsl5lU8Q'
 consumer_secret = '9XEuSiCl708SM34KWonTplymBegH2UrPmNuSznBmBkw'
 
@@ -20,7 +20,7 @@ access_secret = auth.access_token.secret
 auth.set_access_token(access_token, access_secret)
 api = tweepy.API(auth) # Instantiate API object
 
-# 
+# helpful variables
 status_list = [] # Create empty list to hold statuses
 cur_status_count = 0 
 
