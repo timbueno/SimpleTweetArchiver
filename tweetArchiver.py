@@ -48,7 +48,7 @@ while statuses != []:
     
     # Get new page of statuses based on current id location
     statuses = api.user_timeline(count=200, include_rts=True, max_id=theMaxId)
-    print "%d of %d tweets processed" % (cur_status_count, total_status_count)
+    print "%d of %d tweets processed..." % (cur_status_count, total_status_count)
 
 print "- - - - - - - - - - - - - - - - -"
 print "Total Statuses Retrieved: " + str(len(status_list))
