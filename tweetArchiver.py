@@ -3,8 +3,8 @@ import codecs
 from time import sleep
 
 # Archive file location
-archiveFile = "/Users/timbueno/Desktop/logDir/twitter2.txt"
-theUserName = 'deathbyvolcano'
+archiveFile = "/Users/timbueno/Desktop/logDir/twitter.txt"
+theUserName = 'timbueno'
 
 # Create Twitter API Object
 api = tweepy.API()
