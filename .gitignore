@@ -2,3 +2,4 @@
 /venv
 latestTweetId
 *.tweetid
+cruft.txt
