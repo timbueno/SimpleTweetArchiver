@@ -1,30 +1,32 @@
-# tweetArchiver.py
+# autotweetArchiver.py
 #
 # Quickly archive your tweets to a plain text file.
 #
-# This script is limited to retrieving only your
-# 3,200 most recent tweets (you have twitter
-# to thank for that)
 #
 # Created by: Tim Bueno
 # Website: http://www.timbueno.com
 #
-# USAGE: python tweetArchiver.py
+# USAGE: python autoTweetArchiver.py {USERNAME} {LOG_FILE} {TIMEZONE}
+# EXAMPLE: python autoTweetArchive.py timbueno /Users/timbueno/Desktop/logDir/timbueno_twitter.txt US/Eastern
+# EXAMPLE: python autoTweetArchive.py BuenoDev /Users/timbueno/Desktop/logDir/buenodev_twitter.txt US/Eastern
+#
+# TODO:
 
 import tweepy
 import codecs
 import os
-import time
+import sys
 import pytz
 
 
 # USER INFO
-archiveFile = "/Users/timbueno/Desktop/logDir/twitter.txt"
-theUserName = 'timbueno'
-homeTZ = pytz.timezone('US/Eastern')
+theUserName = sys.argv[1]
+archiveFile = sys.argv[2]
+homeTZ = sys.argv[3]
+homeTZ = pytz.timezone(homeTZ)
 
 # lastTweetId file location
-idFile = 'latestTweetId'
+idFile = theUserName + '.tweetid'
 # Instantiate time zone object
 utc = pytz.utc
 # Create Twitter API Object
@@ -118,6 +120,7 @@ if status_list != []:
     f.close()
 
     # Write most recent tweet id to file for reuse
+    print "Saving last tweet id for later..."
     f = open(idFile, 'w')
     f.write(str(status_list[0].id))
     f.close()
