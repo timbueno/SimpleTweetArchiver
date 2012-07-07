@@ -14,11 +14,15 @@
 import tweepy
 import codecs
 import os
-from time import sleep
+import time
+import pytz
+
+utc = pytz.utc
 
 # Archive file location
-archiveFile = "/Users/timbueno/Desktop/logDir/twitterTest2.txt"
+archiveFile = "/Users/timbueno/Desktop/logDir/twitter.txt"
 theUserName = 'timbueno'
+homeTZ = pytz.timezone('US/Eastern')
 
 # lastTweetId file location
 idFile = 'latestTweetId'
@@ -29,6 +33,9 @@ api = tweepy.API()
 status_list = [] # Create empty list to hold statuses
 cur_status_count = 0
 realName = ''
+
+print "- - - - - - - - - - - - - - - - -"
+print "tweetArchiver.py"
 
 if os.path.exists(idFile):
     # Get most recent tweet id from file
@@ -102,8 +109,9 @@ else:
 if status_list != []:
     f = codecs.open(archiveFile, 'a', 'utf-8')
     for status in reversed(status_list):
+        theTime = utc.localize(status.created_at).astimezone(homeTZ)
         f.write(status.text + '\n')
-        f.write(status.created_at.strftime("%B %d, %Y at %I:%M%p\n"))
+        f.write(theTime.strftime("%B %d, %Y at %I:%M%p\n"))
         f.write('http://twitter.com/'+status.author.screen_name+'/status/'+str(status.id)+'\n')
         f.write('- - - - - \n\n')
     f.close()
