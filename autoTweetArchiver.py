@@ -30,7 +30,8 @@ homeTZ = pytz.timezone(homeTZ)
 
 # lastTweetId file location
 idFile = theUserName + '.tweetid'
-idFile = os.path.join(os.getcwd(), idFile)
+pwd = os.path.dirname(__file__)
+idFile = os.path.join(pwd, idFile)
 print "******" + idFile
 # Instantiate time zone object
 utc = pytz.utc
