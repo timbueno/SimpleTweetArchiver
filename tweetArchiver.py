@@ -13,7 +13,6 @@
 
 import tweepy
 import codecs
-from time import sleep
 import pytz
 
 utc = pytz.utc
