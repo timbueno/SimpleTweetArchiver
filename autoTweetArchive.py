@@ -7,6 +7,7 @@
 # Website: http://www.timbueno.com
 #
 # USAGE: python autoTweetArchiver.py {USERNAME} {LOG_FILE} {TIMEZONE}
+#
 # EXAMPLE: python autoTweetArchive.py timbueno /Users/timbueno/Desktop/logDir/timbueno_twitter.txt US/Eastern
 # EXAMPLE: python autoTweetArchive.py BuenoDev /Users/timbueno/Desktop/logDir/buenodev_twitter.txt US/Eastern
 #
@@ -19,7 +20,7 @@ import sys
 import pytz
 
 
-# USER INFO
+# USER INFO GATHERED FROM COMMAND LINE
 theUserName = sys.argv[1]
 archiveFile = sys.argv[2]
 homeTZ = sys.argv[3]
@@ -35,7 +36,6 @@ api = tweepy.API()
 # helpful variables
 status_list = [] # Create empty list to hold statuses
 cur_status_count = 0
-realName = ''
 
 print "- - - - - - - - - - - - - - - - -"
 print "tweetArchiver.py"
@@ -57,15 +57,9 @@ if os.path.exists(idFile):
     if statuses != []:
         theUser = statuses[0].author
         total_status_count = theUser.statuses_count
-        realName = theUser.name
-    else:
-        realName = theUserName
+#    else:
+#        realName = theUserName
      
-    print "- - - - - - - - - - - - - - - - -"
-    print "Archiving "+realName+"'s tweets"
-    print "Archive file:"
-    print archiveFile
-    print "- - - - - - - - - - - - - - - - -"
     while statuses != []:
         cur_status_count = cur_status_count + len(statuses)
         for status in statuses:
@@ -85,10 +79,6 @@ else:
     print "- - - - - - - - - - - - - - - - -"
     print "No tweetID file found..."
     print "Creating a new archive file"
-    print "- - - - - - - - - - - - - - - - -"
-    print "Archiving "+theUser.name+"'s tweets"
-    print "Archive file:"
-    print archiveFile
     print "- - - - - - - - - - - - - - - - -"
 
     while statuses != []:
@@ -110,6 +100,10 @@ else:
 
 # Write tweets to archive
 if status_list != []:
+    print "Writing tweets to archive"
+    print "Archive file:"
+    print archiveFile
+    print "- - - - - - - - - - - - - - - - -"
     f = codecs.open(archiveFile, 'a', 'utf-8')
     for status in reversed(status_list):
         theTime = utc.localize(status.created_at).astimezone(homeTZ)
@@ -126,6 +120,7 @@ if status_list != []:
     f.close()
 
 if status_list == []:
+    print "- - - - - - - - - - - - - - - - -"
     print "No new tweets to archive!"
 print "Total Statuses Retrieved: " + str(len(status_list))
 print "Finished!"
