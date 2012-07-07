@@ -17,15 +17,16 @@ import os
 import time
 import pytz
 
-utc = pytz.utc
 
-# Archive file location
+# USER INFO
 archiveFile = "/Users/timbueno/Desktop/logDir/twitter.txt"
 theUserName = 'timbueno'
 homeTZ = pytz.timezone('US/Eastern')
 
 # lastTweetId file location
 idFile = 'latestTweetId'
+# Instantiate time zone object
+utc = pytz.utc
 # Create Twitter API Object
 api = tweepy.API()
 
