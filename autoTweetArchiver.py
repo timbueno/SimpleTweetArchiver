@@ -30,9 +30,8 @@ homeTZ = pytz.timezone(homeTZ)
 
 # lastTweetId file location
 idFile = theUserName + '.tweetid'
-pwd = os.path.dirname(__file__)
-idFile = os.path.join(pwd, idFile)
-print "******" + idFile
+pwd = os.path.dirname(__file__) # get script directory
+idFile = os.path.join(pwd, idFile) # join dir and filename
 # Instantiate time zone object
 utc = pytz.utc
 # Create Twitter API Object
