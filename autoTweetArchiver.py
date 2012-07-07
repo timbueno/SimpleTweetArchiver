@@ -1,7 +1,8 @@
 # autotweetArchiver.py
 #
 # Quickly archive your tweets to a plain text file.
-#
+# Attach this script to a cron task and automatically
+# archive your tweets at any interval you choose!
 #
 # Created by: Tim Bueno
 # Website: http://www.timbueno.com
@@ -10,6 +11,7 @@
 #
 # EXAMPLE: python autoTweetArchiver.py timbueno /Users/timbueno/Desktop/logDir/timbueno_twitter.txt US/Eastern
 # EXAMPLE: python autoTweetArchiver.py BuenoDev /Users/timbueno/Desktop/logDir/buenodev_twitter.txt US/Eastern
+# EXAMPLE: python autoTweetArchiver.py BuenoDev /home/blog/Dropbox/Blog/buenodev_twitter.txt US/Eastern
 #
 # TODO:
 
@@ -28,6 +30,7 @@ homeTZ = pytz.timezone(homeTZ)
 
 # lastTweetId file location
 idFile = theUserName + '.tweetid'
+idFile = os.path.join(os.getcwd(), idFile)
 # Instantiate time zone object
 utc = pytz.utc
 # Create Twitter API Object
@@ -35,10 +38,10 @@ api = tweepy.API()
 
 # helpful variables
 status_list = [] # Create empty list to hold statuses
-cur_status_count = 0
+cur_status_count = 0 # set current status count to zero
 
 print "- - - - - - - - - - - - - - - - -"
-print "tweetArchiver.py"
+print "autoTweetArchiver.py"
 
 if os.path.exists(idFile):
     # Get most recent tweet id from file
@@ -57,9 +60,7 @@ if os.path.exists(idFile):
     if statuses != []:
         theUser = statuses[0].author
         total_status_count = theUser.statuses_count
-#    else:
-#        realName = theUserName
-     
+
     while statuses != []:
         cur_status_count = cur_status_count + len(statuses)
         for status in statuses:
@@ -100,13 +101,14 @@ else:
 
 # Write tweets to archive
 if status_list != []:
-    print "Writing tweets to archive"
+    print "Writing tweets to archive..."
     print "Archive file:"
     print archiveFile
     print "- - - - - - - - - - - - - - - - -"
     f = codecs.open(archiveFile, 'a', 'utf-8')
     for status in reversed(status_list):
         theTime = utc.localize(status.created_at).astimezone(homeTZ)
+        # Format your tweet archive here!
         f.write(status.text + '\n')
         f.write(theTime.strftime("%B %d, %Y at %I:%M%p\n"))
         f.write('http://twitter.com/'+status.author.screen_name+'/status/'+str(status.id)+'\n')
