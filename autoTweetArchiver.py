@@ -8,8 +8,8 @@
 #
 # USAGE: python autoTweetArchiver.py {USERNAME} {LOG_FILE} {TIMEZONE}
 #
-# EXAMPLE: python autoTweetArchive.py timbueno /Users/timbueno/Desktop/logDir/timbueno_twitter.txt US/Eastern
-# EXAMPLE: python autoTweetArchive.py BuenoDev /Users/timbueno/Desktop/logDir/buenodev_twitter.txt US/Eastern
+# EXAMPLE: python autoTweetArchiver.py timbueno /Users/timbueno/Desktop/logDir/timbueno_twitter.txt US/Eastern
+# EXAMPLE: python autoTweetArchiver.py BuenoDev /Users/timbueno/Desktop/logDir/buenodev_twitter.txt US/Eastern
 #
 # TODO:
 
