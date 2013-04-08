@@ -1,2 +1,2 @@
-tweepy
+tweepy==1.9
 pytz
