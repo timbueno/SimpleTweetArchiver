@@ -9,6 +9,9 @@
 #
 # USAGE: python autoTweetArchiver.py {USERNAME} {LOG_FILE} {TIMEZONE}
 #
+# NOTE!: Needs a twitter-credentials file located in the same folder as 
+#        the script.
+#
 # EXAMPLE: python autoTweetArchiver.py timbueno /Users/timbueno/Desktop/logDir/timbueno_twitter.txt US/Eastern
 # EXAMPLE: python autoTweetArchiver.py BuenoDev /Users/timbueno/Desktop/logDir/buenodev_twitter.txt US/Eastern
 # EXAMPLE: python autoTweetArchiver.py BuenoDev /home/blog/Dropbox/Blog/buenodev_twitter.txt US/Eastern
