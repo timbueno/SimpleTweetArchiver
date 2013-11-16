@@ -32,10 +32,25 @@ homeTZ = pytz.timezone(homeTZ)
 idFile = theUserName + '.tweetid'
 pwd = os.path.dirname(__file__) # get script directory
 idFile = os.path.join(pwd, idFile) # join dir and filename
+
+
+def setup_api():
+    """Authorize the use of the Twitter API."""
+    a = {}
+    # with open(os.environ['HOME'] + '/.twitter-credentials') as credentials:
+    with open('twitter-credentials') as credentials:
+        for line in credentials:
+          k, v = line.split(': ')
+          a[k] = v.strip()
+    auth = tweepy.OAuthHandler(a['consumerKey'], a['consumerSecret'])
+    auth.set_access_token(a['token'], a['tokenSecret'])
+    return tweepy.API(auth)
+
+
 # Instantiate time zone object
 utc = pytz.utc
 # Create Twitter API Object
-api = tweepy.API()
+api = setup_api()
 
 # helpful variables
 status_list = [] # Create empty list to hold statuses
